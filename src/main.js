@@ -37,10 +37,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
         else {
             photoChanger.src = `./img/landing-slider/${rnd+1}.jpg`;
-            photoChanger.classList.remove('active')
-            textChanger.classList.remove('active')
 
-            showText = true
+            photoChanger.onload = function() {
+                photoChanger.classList.remove('active')
+                textChanger.classList.remove('active')
+
+                showText = true
+            };
         }
     }, 3000)    
 
