@@ -22,7 +22,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     /*landing slider*/
 
     setInterval(function () {
-        let rnd = Math.floor(Math.random() * 54)
+        photoChanger.onload = function() {
+            let rnd = Math.floor(Math.random() * 54)
 
         if(showText) {
             textChanger.innerHTML = text[counterLandingPhotos]
@@ -38,12 +39,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
         else {
             photoChanger.src = `./img/landing-slider/${rnd+1}.jpg`;
 
-            photoChanger.onload = function() {
+            
                 photoChanger.classList.remove('active')
                 textChanger.classList.remove('active')
 
                 showText = true
-            };
+            }
         }
     }, 3000)    
 
