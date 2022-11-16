@@ -12,46 +12,39 @@ const parallaxImages = document.querySelectorAll('.photo-parallax__item img');
 
 const header = document.querySelector('.header');
 
-let showText = true;
 let showParallax = true;
 let checkScroll = true;
-let loadImg = true;
 
 window.addEventListener('DOMContentLoaded', (event) => {
 
     /*landing slider*/
 
-    setInterval(function () {
+    function imageChange() {
         let rnd = Math.floor(Math.random() * 54)
 
-        if(loadImg) {
-            loadImg = false
-            if(showText) {
-                textChanger.innerHTML = text[counterLandingPhotos]
-                counterLandingPhotos++
-                if(counterLandingPhotos > 4)
-                counterLandingPhotos = 0
-    
-                photoChanger.classList.add('active')
-                textChanger.classList.add('active')
-    
-                showText = false
-                loadImg = true
-            }
-            else {
-                photoChanger.src = `./img/landing-slider/${rnd+1}.jpg`;
-    
-                photoChanger.onload = function() {
-                    photoChanger.classList.remove('active')
-                    textChanger.classList.remove('active')
-                    
-                    loadImg = true
-                    showText = true
-                };
-            }
+        photoChanger.src = `./img/landing-slider/${rnd+1}.jpg`;
+
+        photoChanger.onload = function() {
+            photoChanger.classList.remove('active')
+            textChanger.classList.remove('active')
+
+            setTimeout(textChange, 3000)
         }
-        
-    }, 3000)    
+    }  
+
+    function textChange () {
+        textChanger.innerHTML = text[counterLandingPhotos]
+        counterLandingPhotos++
+        if(counterLandingPhotos > 4)
+            counterLandingPhotos = 0
+
+        photoChanger.classList.add('active')
+        textChanger.classList.add('active')
+
+        setTimeout(imageChange, 3000)
+    }
+
+    imageChange()
 
     /*photo slider*/
 
