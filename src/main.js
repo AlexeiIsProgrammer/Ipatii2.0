@@ -15,37 +15,42 @@ const header = document.querySelector('.header');
 let showText = true;
 let showParallax = true;
 let checkScroll = true;
-
+let loadImg = true;
 
 window.addEventListener('DOMContentLoaded', (event) => {
 
     /*landing slider*/
 
     setInterval(function () {
-        photoChanger.onload = function() {
-            let rnd = Math.floor(Math.random() * 54)
+        let rnd = Math.floor(Math.random() * 54)
 
-        if(showText) {
-            textChanger.innerHTML = text[counterLandingPhotos]
-            counterLandingPhotos++
-            if(counterLandingPhotos > 4)
-            counterLandingPhotos = 0
-
-            photoChanger.classList.add('active')
-            textChanger.classList.add('active')
-
-            showText = false
-        }
-        else {
-            photoChanger.src = `./img/landing-slider/${rnd+1}.jpg`;
-
-            
-                photoChanger.classList.remove('active')
-                textChanger.classList.remove('active')
-
-                showText = true
+        if(loadImg) {
+            loadImg = false
+            if(showText) {
+                textChanger.innerHTML = text[counterLandingPhotos]
+                counterLandingPhotos++
+                if(counterLandingPhotos > 4)
+                counterLandingPhotos = 0
+    
+                photoChanger.classList.add('active')
+                textChanger.classList.add('active')
+    
+                showText = false
+                loadImg = true
+            }
+            else {
+                photoChanger.src = `./img/landing-slider/${rnd+1}.jpg`;
+    
+                photoChanger.onload = function() {
+                    photoChanger.classList.remove('active')
+                    textChanger.classList.remove('active')
+                    
+                    loadImg = true
+                    showText = true
+                };
             }
         }
+        
     }, 3000)    
 
     /*photo slider*/
